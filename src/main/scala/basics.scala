@@ -115,3 +115,16 @@ for (i <- 0 to 10) {
 val pair:(String, Int) = ("one", 1)
 println(pair._1)
 println(pair._2)
+
+// Так же есть синтаксический сахар для возврата кортежей из функций
+def getXY = (1, 2)
+
+// язык может сам разобрать кортеж на x и y
+val (x, y) = getXY
+println(x)
+println(y)
+
+// это аналог страшной записи
+val xy = getXY
+println(xy._1)
+println(xy._2)
