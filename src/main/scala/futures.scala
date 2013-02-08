@@ -1,4 +1,4 @@
-import actors.{Futures, Future}
+import scala.actors.{Futures, Future}
 
 val future: Future[String] = Futures.future {
   Thread.sleep(1500)

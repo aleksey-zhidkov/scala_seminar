@@ -1,8 +1,9 @@
 trait DefaultLogger extends Logger {
 
-  protected val prefix: String = "Constant"
+  protected val prefix = "Constant"
 
-  protected def suffix: String = "Also constant"
+  // а абстрактные методы можно реализовывать полямм
+  protected val suffix = "Also constant"
 
 }
 
@@ -13,7 +14,7 @@ object DefaultLogger {
   // зуб не дам, но кажется компилятор сгенеряет под это дело новый класс и мы тут ещё и в производительности не потеряем
 
   // а ещё мона так:
-  val pointWithLogger = new Point2D(2, 2) with Logger{
+  val pointWithLogger = new Point2D(2, 2) with Logger {
 
     protected val prefix: String = x.toString
 

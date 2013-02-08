@@ -15,11 +15,11 @@ done
 * Option
 * Case classes - Алгебраические типы данных
 * Акторы
-
-todo
 * Импликты
 * Встроенный XML
 * Линивая инциализация
+
+todo
 * Value Classes
 * Пакеты и контроль доступа
 * Dependent method types

@@ -33,8 +33,8 @@ def updateUserAndSendEmail(user: Option[String], email: Option[String]) {
     case None => println("Создаём дефолтного пользователя")
   }
 
-  email foreach {String =>
-    println("Отправляем нотификацию на " + _)
+  email foreach {email: String =>
+    println("Отправляем нотификацию на " + email)
   }
 
 }
