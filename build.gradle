@@ -1,3 +1,5 @@
+allprojects {
+
 apply plugin: 'scala'
 apply plugin: 'idea'
 
@@ -18,8 +20,6 @@ dependencies {
     compile group: 'com.typesafe.akka', name: 'akka-actor_2.10', version: '2.1.2'
 }
 
-task wrapper(type: Wrapper) { gradleVersion = '1.5' }
-
 idea {
 
     module {
@@ -27,4 +27,8 @@ idea {
         excludeDirs += file('gradle')
 
     }
+}
+
+task wrapper(type: Wrapper) { gradleVersion = '1.5' }
+
 }
