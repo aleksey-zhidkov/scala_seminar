@@ -3,18 +3,7 @@ apply plugin: 'idea'
 
 final USER_HOME = System.properties['user.home']
 
-task wrapper(type: Wrapper) { gradleVersion = '1.5' }
-
-idea {
-
-    module {
-
-        excludeDirs += file('gradle')
-
-    }
-}
-
-buildDir = relativePath("${USER_HOME}/builds/jem")
+buildDir = relativePath("${USER_HOME}/builds/scala_tutorial")
 
 repositories {
     mavenCentral()
@@ -26,4 +15,16 @@ dependencies {
             'org.scala-lang:scala-library:2.10.1'
 
     compile 'org.scala-lang:scala-library:2.10.1'
+    compile group: 'com.typesafe.akka', name: 'akka-actor_2.10', version: '2.1.2'
+}
+
+task wrapper(type: Wrapper) { gradleVersion = '1.5' }
+
+idea {
+
+    module {
+
+        excludeDirs += file('gradle')
+
+    }
 }
