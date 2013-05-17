@@ -1,34 +1,39 @@
-allprojects {
-
-apply plugin: 'scala'
 apply plugin: 'idea'
 
-final USER_HOME = System.properties['user.home']
+subprojects {
 
-buildDir = relativePath("${USER_HOME}/builds/scala_tutorial")
+    apply plugin: 'scala'
+    apply plugin: 'idea'
 
-repositories {
-    mavenCentral()
-}
+    final USER_HOME = System.properties['user.home']
 
-dependencies {
- 
-    scalaTools 'org.scala-lang:scala-compiler:2.10.1',
-            'org.scala-lang:scala-library:2.10.1'
+    buildDir = relativePath("${USER_HOME}/builds/scala_tutorial")
 
-    compile 'org.scala-lang:scala-library:2.10.1'
-    compile group: 'com.typesafe.akka', name: 'akka-actor_2.10', version: '2.1.2'
-}
+    repositories {
+        mavenCentral()
+    }
 
-idea {
+    dependencies {
 
-    module {
+        scalaTools 'org.scala-lang:scala-compiler:2.10.1',
+                'org.scala-lang:scala-library:2.10.1'
 
-        excludeDirs += file('gradle')
+        compile 'org.scala-lang:scala-compiler:2.10.1'
+        compile 'org.scala-lang:scala-library:2.10.1'
+        compile 'org.scala-lang:scala-reflect:2.10.1'
+        compile 'com.typesafe.akka:akka-actor_2.10:2.1.2'
 
     }
-}
 
-task wrapper(type: Wrapper) { gradleVersion = '1.5' }
+    idea {
+
+        module {
+
+            excludeDirs += file('gradle')
+
+        }
+    }
+
+    task wrapper(type: Wrapper) { gradleVersion = '1.6' }
 
 }
