@@ -16,7 +16,8 @@ object Profiler {
 
   def stop(method: String) = {
     println("stop")
-    times.put(method, times.get(method).getOrElse(0L) + System.currentTimeMillis() - starts.get(method).get)
+    val currentTime: Long = System.currentTimeMillis()
+    times.put(method, times.get(method).getOrElse(0L) + currentTime - starts.remove(method).getOrElse(currentTime))
   }
 
   def stat() {
