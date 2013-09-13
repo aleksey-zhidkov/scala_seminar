@@ -1,6 +1,6 @@
 package object try_keyword {
 
-  def `try`[T <: AutoCloseable](res: T)(tryBody: T => Unit): CatchOrFinally = new CatchOrFinally(exec(res)(tryBody))
+  def `try`[T <: {def close()}](res: T)(tryBody: T => Unit): CatchOrFinally = new CatchOrFinally(exec(res)(tryBody))
 
   class CatchOrFinally(f: (CatchBlock) => (FinallyBlock) => Unit) {
 
@@ -29,7 +29,7 @@ package object try_keyword {
   type CatchBlock = Option[PartialFunction[Throwable, Unit]]
   type FinallyBlock = Option[() => Unit]
 
-  def exec[T <: AutoCloseable](res: T)(tryBody: T => Unit)(catchBody: CatchBlock)(finallyBody: FinallyBlock) {
+  def exec[T <: {def close()}](res: T)(tryBody: T => Unit)(catchBody: CatchBlock)(finallyBody: FinallyBlock) {
     try {
       tryBody(res)
     } catch {

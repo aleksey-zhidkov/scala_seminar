@@ -2,7 +2,7 @@
 val strings = List("1", "2", "3")
 
 // здесь также приведён пример wildcard'а
-val ints = strings map { Integer.parseInt(_) }
+val ints = strings map { Integer.parseInt }
 
 // reduce - функция-коллектор
 val sum = ints reduce { _ + _ }
