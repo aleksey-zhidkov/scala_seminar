@@ -29,7 +29,7 @@ package object try_keyword {
   type CatchBlock = Option[PartialFunction[Throwable, Unit]]
   type FinallyBlock = Option[() => Unit]
 
-  def exec[T <: {def close()}](res: T)(tryBody: T => Unit)(catchBody: CatchBlock)(finallyBody: FinallyBlock) {
+  private def exec[T <: {def close()}](res: T)(tryBody: T => Unit)(catchBody: CatchBlock)(finallyBody: FinallyBlock) {
     try {
       tryBody(res)
     } catch {

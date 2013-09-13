@@ -25,10 +25,10 @@ class TryTest {
     try {
 
 
-      `try`(res) {
+      `try` (res) {
         res: TestResource =>
           throw new RuntimeException
-      }.`;`
+      } `;`
 
 
       Assert.fail("Exception expected")
@@ -44,7 +44,7 @@ class TryTest {
     try {
 
 
-      `try`(res) {
+      `try` (res) {
         res: TestResource =>
           throw new RuntimeException
       } `finally` {
@@ -68,12 +68,12 @@ class TryTest {
     try {
 
 
-      `try`(res) {
+      `try` (res) {
         res: TestResource =>
           throw new RuntimeException
       } `catch` {
         case ex: Throwable => catchCalled = true
-      }`;`
+      } `;`
 
 
     } catch {
@@ -89,12 +89,12 @@ class TryTest {
     try {
 
 
-      `try`(res) {
+      `try` (res) {
         res: TestResource =>
           throw new RuntimeException
       } `catch` {
         case ex: IllegalArgumentException => catchCalled = true
-      }`;`
+      } `;`
 
 
       Assert.fail("Exception expected")
@@ -112,7 +112,7 @@ class TryTest {
     try {
 
 
-      `try`(res) {
+      `try` (res) {
         res: TestResource =>
           throw new RuntimeException
       } `catch` {
@@ -136,7 +136,7 @@ class TryTest {
     try {
 
 
-      `try`(res) {
+      `try` (res) {
         res: TestResource =>
           throw new RuntimeException
       } `catch` {
