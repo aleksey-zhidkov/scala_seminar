@@ -1,6 +1,0 @@
-dependencies {
-
-    compile project(':macros')
-    testCompile 'junit:junit:4.11'
-
-}
