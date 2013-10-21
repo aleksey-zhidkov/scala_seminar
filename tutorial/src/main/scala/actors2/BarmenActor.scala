@@ -5,6 +5,7 @@ import akka.pattern.ask
 import scala.concurrent.duration.Duration
 import java.util.concurrent.TimeUnit
 import scala.concurrent.Await
+import akka.util.Timeout
 
 
 class BarmenActor(coffeeMachine: ActorRef, cashbox: ActorRef) extends Actor {
@@ -22,6 +23,8 @@ class BarmenActor(coffeeMachine: ActorRef, cashbox: ActorRef) extends Actor {
       if (money < drinkType.cost) sender ! NotEnoughMoneyResponse(drinkType.cost - money)
       else {
         val client = sender
+
+        implicit val timeout = Timeout(1000)
 
         val futureDrink = coffeeMachine ? PrepareDrinkRequest(drinkType)
         val futureCheck = cashbox ? PutRequest(money)
