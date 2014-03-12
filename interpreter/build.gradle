@@ -1,0 +1,6 @@
+apply plugin: 'scala'
+
+dependencies {
+    def majorScalaVersion = "2.10"
+    testCompile "org.scalatest:scalatest_$majorScalaVersion:2.0.RC3"
+}
