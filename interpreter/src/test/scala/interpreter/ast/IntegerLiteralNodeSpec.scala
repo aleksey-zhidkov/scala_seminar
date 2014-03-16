@@ -1,4 +1,4 @@
-package azhidkov.ast
+package interpreter.ast
 
 import org.scalatest.{Matchers, WordSpec, GivenWhenThen}
 import org.scalatest.junit.JUnitRunner
@@ -27,7 +27,7 @@ class IntegerLiteralNodeSpec extends WordSpec with Matchers with GivenWhenThen {
         "returns it's value" in {
 
           Given(s"IntegerLiteralNode with value $literalValue")
-          val node = IntegerLiteralNode(literalValue)
+          val node = LiteralNode(literalValue)
 
           When("node evaluated")
           val value: Int = node.eval()

@@ -1,4 +1,4 @@
-package azhidkov.ast
+package interpreter.ast
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
@@ -6,7 +6,7 @@ import org.scalatest.{GivenWhenThen, Matchers, WordSpec}
 import org.scalatest.prop.TableDrivenPropertyChecks._
 
 @RunWith(classOf[JUnitRunner])
-class ArithmeticNodeSpec extends WordSpec with Matchers with GivenWhenThen {
+class ArithmeticExpressionsSpec extends WordSpec with Matchers with GivenWhenThen {
 
   val argumentsList =
     Table(("x", "y", "z", "res"),
@@ -28,9 +28,9 @@ class ArithmeticNodeSpec extends WordSpec with Matchers with GivenWhenThen {
             Given(s"Tree for expression")
             val node = PlusNode(
               MinusNode(
-                MultiplyNode(IntegerLiteralNode(x), IntegerLiteralNode(x)),
-                IntegerLiteralNode(y)),
-              IntegerLiteralNode(z)
+                MultiplyNode(LiteralNode(x), LiteralNode(x)),
+                LiteralNode(y)),
+              LiteralNode(z)
             )
 
             When("node evaluated")
