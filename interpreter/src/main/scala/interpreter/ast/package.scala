@@ -1,5 +1,7 @@
 package interpreter
 
+import interpreter.mem.{Bindings, Variable}
+
 
 package object ast {
   
@@ -42,5 +44,25 @@ package object ast {
   def EqualsNode[OP](leftOperand: ExpressionNode[OP], rightOperand: ExpressionNode[OP]): ExpressionNode[Boolean] = BinaryOpNode[OP, OP, Boolean]({
     _ == _
   }, leftOperand, rightOperand)
-  
+
+  case class IdentifierNode[T](id: String) extends ExpressionNode[T] {
+
+    override def eval(): T = throw new UnsupportedOperationException
+
+  }
+
+  case class VariableNode[T](variable: Variable[T]) extends ExpressionNode[T] {
+
+    override def eval(): T = variable.value
+
+  }
+
+  def resolveIdentifiers[T](tree: ExpressionNode[_], bindings: Bindings): ExpressionNode[T] =
+  tree match {
+    case IdentifierNode(id) => VariableNode(bindings(id).asInstanceOf[Variable[T]])
+    case BinaryOpNode(operator, leftOperand, rightOperand) =>
+      BinaryOpNode(operator, resolveIdentifiers(leftOperand, bindings), resolveIdentifiers(rightOperand, bindings)).asInstanceOf[ExpressionNode[T]]
+    case other: ExpressionNode[T] => other
+  }
+
 }
