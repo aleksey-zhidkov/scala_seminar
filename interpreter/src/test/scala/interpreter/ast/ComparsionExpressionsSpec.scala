@@ -27,21 +27,21 @@ class ComparsionExpressionsSpec extends WordSpec with Matchers with GivenWhenThe
 
             Given(s"Tree for expression")
             val node = EqualsNode(
-                MultiplyNode(
-                  LiteralNode(a),
-                  LiteralNode(b)
-                ),
-                PlusNode(
-                  LiteralNode(c),
-                  LiteralNode(d)
-                )
+              MultiplyNode(
+                LiteralNode(a),
+                LiteralNode(b)
+              ),
+              PlusNode(
+                LiteralNode(c),
+                LiteralNode(d)
               )
+            )
 
             When("node evaluated")
             val value = node.eval()
 
             Then(s"it value should be $res")
-            value should be === res
+            value should be (res)
           }
 
         }

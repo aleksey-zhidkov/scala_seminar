@@ -15,7 +15,7 @@ object REPL extends App {
       val parse: Parser.ParseResult[ExpressionNode[Int]] = Parser.parse(line)
       val output = parse match {
         case Parser.Success(ast: ExpressionNode[Int], _) => ast.eval()
-        case Parser.Failure(message, _) => "Error: " + message
+        case Parser.NoSuccess(message, _) => "Error: " + message
       }
       println(output)
       execLine()

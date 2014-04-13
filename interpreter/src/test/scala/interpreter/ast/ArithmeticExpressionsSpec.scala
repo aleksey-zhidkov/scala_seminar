@@ -37,7 +37,7 @@ class ArithmeticExpressionsSpec extends WordSpec with Matchers with GivenWhenThe
             val value: Int = node.eval()
 
             Then(s"it value should be $res")
-            value should be === res
+            value should be (res)
           }
 
         }

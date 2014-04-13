@@ -4,7 +4,7 @@ import interpreter.mem.{Bindings, Variable}
 
 
 package object ast {
-  
+
   sealed trait ASTNode
 
   sealed trait ExpressionNode[T] extends ASTNode {
@@ -58,11 +58,11 @@ package object ast {
   }
 
   def resolveIdentifiers[T](tree: ExpressionNode[_], bindings: Bindings): ExpressionNode[T] =
-  tree match {
-    case IdentifierNode(id) => VariableNode(bindings(id).asInstanceOf[Variable[T]])
-    case BinaryOpNode(operator, leftOperand, rightOperand) =>
-      BinaryOpNode(operator, resolveIdentifiers(leftOperand, bindings), resolveIdentifiers(rightOperand, bindings)).asInstanceOf[ExpressionNode[T]]
-    case other: ExpressionNode[T] => other
-  }
+    tree match {
+      case IdentifierNode(id) => VariableNode(bindings(id).asInstanceOf[Variable[T]])
+      case BinaryOpNode(operator, leftOperand, rightOperand) =>
+        BinaryOpNode(operator, resolveIdentifiers(leftOperand, bindings), resolveIdentifiers(rightOperand, bindings)).asInstanceOf[ExpressionNode[T]]
+      case other: ExpressionNode[T] => other
+    }
 
 }

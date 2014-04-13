@@ -19,7 +19,7 @@ class ResolveIdentifiersSpec extends WordSpec with Matchers {
 
       "return an VariableNode wich evaluates to specified value" in {
         val value: Int = resolvedTree.eval()
-        value should be (1)
+        value should be(1)
       }
 
     }
@@ -37,7 +37,7 @@ class ResolveIdentifiersSpec extends WordSpec with Matchers {
       val value: Int = resolvedTree.eval()
 
       "return correct value" in {
-        value should be (3)
+        value should be(3)
       }
     }
 

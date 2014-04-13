@@ -20,24 +20,24 @@ class IntegerLiteralNodeSpec extends WordSpec with Matchers with GivenWhenThen {
 
   forAll(literals) {
     literalValue: Int =>
-    s"An IntegerLiteralNode with value $literalValue" when {
+      s"An IntegerLiteralNode with value $literalValue" when {
 
-      "evaluated" should {
+        "evaluated" should {
 
-        "returns it's value" in {
+          "returns it's value" in {
 
-          Given(s"IntegerLiteralNode with value $literalValue")
-          val node = LiteralNode(literalValue)
+            Given(s"IntegerLiteralNode with value $literalValue")
+            val node = LiteralNode(literalValue)
 
-          When("node evaluated")
-          val value: Int = node.eval()
+            When("node evaluated")
+            val value: Int = node.eval()
 
-          Then(s"it value should be $literalValue")
-          value should be === literalValue
+            Then(s"it value should be $literalValue")
+            value should be (literalValue)
+          }
+
         }
-
       }
-    }
   }
 
 }

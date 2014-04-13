@@ -5,23 +5,11 @@ import interpreter.ast.{ExpressionNode, LiteralNode, PlusNode, MinusNode, Multip
 
 object Parser extends JavaTokenParsers {
 
-  def expr: Parser[ExpressionNode[Int]] =
-    (term ~ "+" ~ term) ^^ {
-      case lhs ~ plus ~ rhs => PlusNode(lhs, rhs)
-    } |
-      (term ~ "-" ~ term) ^^ {
-        case lhs ~ minus ~ rhs => MinusNode(lhs, rhs)
-      } |
-      term
+  def parse(text: String) = parseAll(expr, text)
 
-  def term: Parser[ExpressionNode[Int]] =
-    (factor ~ "*" ~ factor) ^^ {
-      case lhs ~ times ~ rhs => MultiplyNode(lhs, rhs)
-    } |
-      (factor ~ "/" ~ factor) ^^ {
-        case lhs ~ div ~ rhs => DivideNode(lhs, rhs)
-      } |
-      factor
+  def expr: Parser[ExpressionNode[Int]] = binaryOp(term, "+" | "-")
+
+  def term: Parser[ExpressionNode[Int]] = binaryOp(factor, "*" | "/")
 
   def factor: Parser[ExpressionNode[Int]] =
     "(" ~> expr <~ ")" |
@@ -29,6 +17,22 @@ object Parser extends JavaTokenParsers {
         x => LiteralNode(x.toInt)
       }
 
-  def parse(text: String) = parseAll(expr, text)
+  def binaryOp(child: => Parser[ExpressionNode[Int]], ops: Parser[String]): Parser[ExpressionNode[Int]] =
+    child ~ rep(ops ~ child) ^^ {
+      case lhs ~ Nil => lhs
+      case lhs ~ tail => build(lhs, tail)
+    }
+
+  val node = Map(
+    "+" -> PlusNode _,
+    "-" -> MinusNode _,
+    "*" -> MultiplyNode _,
+    "/" -> DivideNode _
+  )
+
+  def build(lhs: ExpressionNode[Int], rhs: List[String ~ ExpressionNode[Int]]): ExpressionNode[Int] = rhs match {
+    case op ~ rhsOperand :: Nil => node(op)(lhs, rhsOperand)
+    case op ~ rhsOperand :: tail => build(node(op)(lhs, rhsOperand), tail)
+  }
 
 }
